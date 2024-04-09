@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   
+   
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script><style type="text/css" id="operaUserStyle"></style>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js" integrity="sha384-ODmDIVzN+pFdexxHEHFBQH3/9/vQ9uori45z4JjnFsRydbmQbmL5t1tQ0culUzyK" crossorigin="anonymous"></script>
+    <title>Document</title>
+    <style>
+        .navbar {
+
+            background-color: white;
+        }
+
+        .navbar ul {
+            overflow: auto;
+
+        }
+
+        .navbar li {
+
+
+            float: left;
+            list-style: none;
+            margin: 13px 20px;
+
+
+
+        }
+
+        .navbar li a {
+            text-decoration: none;
+            color: black;
+        }
+
+        .navbar li a:hover {
+
+            color: black;
+
+        }
+
+        .search {
+            float: right;
+            margin: 0px;
+            padding: 0px 14px;
+
+
+
+        }
+
+        .navbar h1 {
+            position: relative;
+            left: 500;
+        }
+
+        .header ul li {
+            display: inline-block;
+            position: relative;
+            height: 30px;
+            width: 150px;
+            font-size: x-large;
+            background-color: white;
+            color: black;
+            font-weight: 700;
+            left: 500px;
+            text-align: center;
+            /* opacity: 80%; */
+            top: 30px;
+
+        }
+
+        .header ul {
+
+            position: relative;
+            justify-content: center;
+            display: inline-block;
+            justify-content: center;
+
+        }
+
+        .drop ul li {
+            display: none;
+            font-size: 20px;
+            /* background-color: rgb(213, 208, 208); */
+            /* border: 0.1px solid black; */
+            /* height: 40px;
+            width: 150px; */
+            z-index: 1;
+
+
+
+        }
+
+        .drop ul {
+            position: absolute;
+            left: -540px;
+            margin: -25px 0;
+
+
+        }
+
+        .header ul li:hover>.drop ul li {
+            display: block;
+        }
+
+        .container {
+            background-color: white;
+            height: 13vh;
+        }
+
+        .image {
+            position: absolute;
+            top: 20px;
+            left: 30px;
+            height: 90px;
+            width: 100px;
+            background-size: cover;
+            background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNiVs_Fl5fOT8YdvoLWyNTZeh2ym75nGd2ra7p63WE1isc1YRxMfeTzKpKe8cWVIxoDxQ&usqp=CAU);
+            animation: animate 1s ease 1;
+
+        }
+
+        @keyframes animate {
+            0% {
+                rotate: 0turn;
+            }
+
+            100% {
+                rotate: 1turn;
+            }
+        }
+
+        .header ul li:hover {
+            text-decoration: underline;
+            height: 33px;
+            width: 94px;
+
+        }
+
+        .container5 {
+            display: inline-flex;
+            max-width: 100vw;
+        }
+
+        .container41 {
+            background-image: url("photu/sagar.jpg");
+            background-size: cover;
+
+            height: 50vh;
+            width: 100vw;
+            background-color: rgb(48, 20, 20);
+            position: absolute;
+            left: 100vw;
+            animation: animation 10s ease-in-out 0s infinite;
+        }
+
+        .container2 {
+            background-color: grey;
+            position: relative;
+            height: 50vh;
+            width: 100vw;
+            animation: animation2 10s ease-in-out infinite;
+
+            background-image: url(data:image/jpeg;base64,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);
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        @keyframes animation {
+            0% {
+                left: 100vw;
+            }
+
+            40% {
+                left: 100vw;
+            }
+
+            50% {
+                left: 0vw;
+            }
+
+            90% {
+                left: 0vw;
+            }
+
+            100% {
+                left: -100vw;
+            }
+        }
+
+        @keyframes animation2 {
+
+            0% {
+                left: 0vw;
+            }
+
+            40% {
+                left: 0vw;
+            }
+
+            50% {
+                left: -100vw;
+            }
+
+            55% {
+                left: 100vw;
+            }
+
+            90% {
+                left: 100vw;
+            }
+
+            100% {
+                left: 0vw;
+            }
+        }
+
+
+
+        a {
+            text-decoration: none;
+            color: black;
+        }
+
+        .container3 {
+            display: grid;
+            grid-gap: 30px;
+            grid-template-columns: auto auto auto auto;
+            grid-template-rows: auto auto auto auto;
+            margin: 20px;
+
+
+        }
+
+        .a {
+            background-image: url(https://assets.bonkerscorner.com/uploads/2022/03/23113706/Bonkerscorner_main_character_02-1-600x900.jpg);
+            height: 75vh;
+            background-size: cover;
+            display: block;
+        }
+
+        .option {
+            font-size: 30px;
+            display: none;
+            position: relative;
+            border: 2px solid grey;
+
+
+            left: 100px;
+
+            margin-top: 40px;
+
+
+        }
+
+        .notice {
+
+            font-weight: 900;
+
+
+        }
+
+        .p {
+            background-image: url(https://assets.bonkerscorner.com/uploads/2022/03/23113646/Bonkerscorner_main_character_07-600x900.jpg);
+            height: 70vh;
+            background-size: cover;
+            display: none;
+        }
+
+        .bro:hover>.tshirt {
+            display: block;
+        }
+
+        .bro:hover>.product {
+            display: none;
+        }
+
+        .bro:hover>.option {
+            display: inline-block;
+        }
+
+        .b {
+            background-image: url(https://assets.bonkerscorner.com/uploads/2022/01/04121050/Bonkerscorner_show_no_mercy_121-600x900.jpg);
+            height: 75vh;
+            background-size: cover;
+            display: block;
+        }
+
+        .q {
+            background-image: url(https://assets.bonkerscorner.com/uploads/2022/01/04121110/Bonkerscorner_show_no_mercy_118-600x900.jpg);
+            height: 70vh;
+            background-size: cover;
+            display: none;
+        }
+
+        .c {
+            background-image: url(https://assets.bonkerscorner.com/uploads/2022/03/19181609/Bonkerscorner_wingmen_black_08.jpg);
+            height: 75vh;
+            background-size: cover;
+            display: block;
+        }
+
+        .r {
+            background-image: url(https://assets.bonkerscorner.com/uploads/2022/03/19181604/Bonkerscorner_wingmen_black_07.jpg);
+            height: 70vh;
+            background-size: cover;
+            display: none;
+        }
+
+        .d {
+            background-image: url(https://assets.bonkerscorner.com/uploads/2022/06/11104027/Bonkerscorner_Fins_clan_ost_5-600x900.jpg);
+            height: 75vh;
+            background-size: cover;
+            display: block;
+        }
+
+        .s {
+            background-image: url(https://assets.bonkerscorner.com/uploads/2022/06/11104040/Bonkerscorner_Fins_clan_ost_3-600x900.jpg);
+            height: 70vh;
+            background-size: cover;
+            display: none;
+        }
+
+        .e {
+            background-image: url(https://assets.bonkerscorner.com/uploads/2021/10/22133328/gf-600x900.jpg);
+            height: 75vh;
+            background-size: cover;
+            display: block;
+        }
+
+        .t {
+            background-image: url(https://assets.bonkerscorner.com/uploads/2021/10/22133318/gc-2-600x900.jpg);
+            height: 70vh;
+            background-size: cover;
+            display: none;
+        }
+
+        .f {
+            background-image: url(https://assets.bonkerscorner.com/uploads/2022/02/01114109/Bonkerscorner_travis_scott_faded_effect_sweatshirt_240.jpg);
+            height: 75vh;
+            background-size: cover;
+            display: block;
+        }
+
+        nav ul li:hover {
+            text-decoration: underline;
+            font-weight: bolder;
+        }
+
+        .u {
+            background-image: url(https://assets.bonkerscorner.com/uploads/2022/02/01114058/Bonkerscorner_travis_scott_faded_effect_sweatshirt_238.jpg);
+            height: 70vh;
+            background-size: cover;
+            display: none;
+        }
+
+        .g {
+            background-image: url(https://assets.bonkerscorner.com/uploads/2022/04/09120720/Bonkerscorner_human_arent_real_02-1-600x900.jpg);
+            height: 75vh;
+            background-size: cover;
+            display: block;
+        }
+
+        .v {
+            background-image: url(https://assets.bonkerscorner.com/uploads/2022/03/21132021/Bonkerscorner_black_heavyweight_07-600x900.jpg);
+            height: 70vh;
+            background-size: cover;
+            display: none;
+        }
+
+        .h {
+            background-image: url(https://cdna.lystit.com/photos/asos/24465d17/pull-bear-Khaki-Muscle-Fit-T-shirt.jpeg);
+            height: 75vh;
+            background-size: cover;
+            display: block;
+        }
+
+        .w {
+            background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVcUr9Wy0u6t8TtXers9u-5hoPubLdvPnvPOVMrH7oXXy9G5zESrRdP8GWsA-u_5T7O_4&usqp=CAU);
+            height: 70vh;
+            background-size: cover;
+            display: none;
+        }
+
+        .container4 {
+            display: grid;
+            grid-template-columns: auto auto auto;
+            grid-gap: 50px;
+            margin: 0px 20px;
+        }
+
+        .propertyz {
+            height: 15vh;
+            background-image: url(https://assets.bonkerscorner.com/uploads/2021/10/25134929/shipping_under_48.jpg);
+            display: block;
+            background-size: contain;
+            background-repeat: no-repeat;
+            position: relative;
+            left: 127px;
+            top: 160px;
+            opacity: 50%;
+
+        }
+
+        .quality {
+            height: 60vh;
+            display: inline-block;
+            background-color: white;
+
+            position: relative;
+            text-align: center;
+
+
+
+
+        }
+
+        .work {
+            width: 24vw;
+            position: absolute;
+            background-color: white;
+            left: 44px;
+            top: 300px;
+        }
+
+        .propertyx {
+            height: 15vh;
+            background-image: url(https://assets.bonkerscorner.com/uploads/2021/10/25134930/free_delivery.jpg);
+            display: block;
+            background-size: contain;
+            background-repeat: no-repeat;
+            position: relative;
+            left: 127px;
+            top: 160px;
+            opacity: 50%;
+
+        }
+
+        .propertyy {
+            height: 15vh;
+            background-image: url(https://assets.bonkerscorner.com/uploads/2021/06/21165927/1592433.jpg);
+            display: block;
+            background-size: contain;
+            background-repeat: no-repeat;
+            position: relative;
+            left: 127px;
+            top: 160px;
+            opacity: 50%;
+
+        }
+
+        .insta1 {
+            height: 20px;
+            display: inline-block;
+            background-image: url(https://cdn-icons-png.flaticon.com/512/87/87390.png);
+            position: relative;
+            width: 25px;
+            background-size: contain;
+            z-index: 1;
+            background-repeat: no-repeat;
+            left: 590px;
+            margin: 0px 4px;
+            top: 3px;
+        }
+
+        .instagram {
+            display: inline-block;
+        }
+
+        .call {
+            display: inline-block;
+            font-size: 20px;
+            font-weight: 900;
+            position: relative;
+            left: 570px;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        .fac1 {
+            height: 30px;
+            display: inline-block;
+            background-image: url(https://cdn3.iconfinder.com/data/icons/glypho-social-and-other-logos/64/logo-facebook-512.png);
+            position: relative;
+            width: 40px;
+            background-size: contain;
+            z-index: 1;
+            background-repeat: no-repeat;
+            left: 590px;
+            margin: 0 4px;
+            top: 7px;
+        }
+
+        .twit1 {
+            height: 20px;
+            display: inline-block;
+            background-image: url(https://cdn-icons-png.flaticon.com/512/81/81609.png);
+            position: relative;
+            width: 28px;
+            background-size: contain;
+            z-index: 1;
+            background-repeat: no-repeat;
+            left: 590px;
+            margin: 0px 4px;
+            top: 3px;
+
+
+        }
+
+
+        /* .contact{background-color: aqua;
+            } */
+    </style>
+<style type="text/css">:root zeus-ad, :root topadblock, :root span[id^="ezoic-pub-ad-placeholder-"], :root guj-ad, :root div[jsdata*="CarouselPLA-"][data-id^="CarouselPLA-"], :root div[id^="yandex_ad"], :root div[id^="vuukle-ad-"], :root div[id^="rc-widget-"], :root div[id^="lazyad-"], :root div[id^="js-dfp-"], :root div[id^="gtm-ad-"], :root div[id^="gpt_ad_"], :root div[id^="gpt-ad-hor"], :root div[id^="div-gpt-"], :root div[id^="dfp-slot-"], :root div[id^="dfp-ad-"], :root div[id^="advads_"], :root div[id^="adspot-"], :root div[id^="ads300_250-widget-"], :root div[id^="ads300_100-widget-"], :root div[id^="ads250_250-widget-"], :root div[id^="adrotate_widgets-"], :root div[id^="adngin-"], :root div[id^="adfox_"], :root div[id^="ad_script_"], :root div[id^="ad-server-"], :root div[id^="ad-gpt-"], :root div[id^="ad-div-"], :root div[id*="ScriptRoot"], :root div[id*="MarketGid"], :root div[data-mpu1], :root div[data-insertion], :root div[data-id-advertdfpconf], :root div[data-google-query-id], :root hl-adsense, :root div[data-contentexchange-widget], :root div[data-content="Advertisement"], :root div[data-alias="300x250 Ad 2"], :root div[data-alias="300x250 Ad 1"], :root div[data-adzone], :root div[data-adunit-path], :root div[data-ad-wrapper], :root div[data-ad-targeting], :root div[data-ad-placeholder], :root div[class^="s-dfp-"], :root div[class^="native-ad-"], :root div[data-dfp-id], :root div[class^="kiwi-ad-wrapper"], :root div[class^="Adstyled__AdWrapper-"], :root div[aria-label="Ads"], :root display-ads, :root aside[id^="advads_ad_widget-"], :root aside[id^="adrotate_widgets-"], :root article.ad, :root div[class^="gpt-ad-hor"], :root ark-top-ad, :root app-advertisement, :root amp-embed[type="taboola"], :root amp-connatix-player, :root amp-ad-custom, :root ad-shield-ads, :root ad-desktop-sidebar, :root a[onmousedown^="this.href='https://paid.outbrain.com/network/redir?"][target="_blank"] + .ob_source, :root a[onmousedown^="this.href='https://paid.outbrain.com/network/redir?"][target="_blank"], :root a[onmousedown^="this.href='http://paid.outbrain.com/network/redir?"][target="_blank"] + .ob_source, :root a[href^="https://www.vfreecams.com/in/?track="], :root a[href^="https://www.rabbits.webcam/?id="], :root a[href^="https://www.purevpn.com/"][href*="&utm_source=aff-"], :root a[href^="https://www.privateinternetaccess.com/"] > img, :root a[href^="https://www.passeura.com/"], :root a[href^="https://www.oneclickroot.com/?tap_a="] > img, :root a[href^="https://www.oboom.com/ref/"], :root a[href^="https://www.nutaku.net/signup/landing/"], :root a[href^="https://www.nudeidols.com/cams/"], :root a[href^="https://www.mypornstarcams.com/landing/click/"], :root a[href^="https://www.mrskin.com/account/"], :root a[href^="https://www.kingsoffetish.com/tour?partner_id="], :root a[href^="https://www.jackery.com?aff="] > img, :root a[href^="https://www.iyalc.com/"], :root a[href^="https://www.infowarsstore.com/"] > img, :root a[href^="https://www.highperformancegate.com/"], :root a[href^="https://www.healthrangerstore.com/"] > img, :root a[href^="https://www.goldenfrog.com/vyprvpn?offer_id="][href*="&aff_id="], :root a[href^="https://www.get-express-vpn.com/offer/"], :root a[href^="https://www.financeads.net/tc.php?"], :root a[href^="https://www.clicktraceclick.com/"], :root a[href^="https://www.camsoda.com/enter.php?id="], :root a[href^="https://www.brazzersnetwork.com/landing/"], :root div[class^="Display_displayAd"], :root a[href^="https://www.sheetmusicplus.com/?aff_id="], :root a[href^="https://www.bang.com/?aff="], :root a[href^="https://www.arthrozene.com/"][href*="?tid="], :root a[href^="https://www.adsexse.com/x/"], :root a[href^="https://webroutetrk.com/"], :root iframe[src^="http://ad.yieldmanager.com/"], :root a[href^="https://wantopticalfreelance.com/"], :root a[href^="https://waisheph.com/"], :root a[href^="https://uncensored.game/"], :root a[href^="https://twinrdsyn.com/"], :root a[href^="https://ttf.trmobc.com/"], :root a[href^="https://tsartech.g2afse.com/"], :root a[href^="https://trusted-click-host.com/"], :root a[href^="https://trk.watchlivesports4k.club/"], :root a[href^="https://trk.moviesflix4k.xyz/"], :root a[href^="https://trf.bannerator.com/"], :root a[href^="https://trappist-1d.com/"], :root a[href^="https://tragency-clesburg.icu/"], :root a[href^="https://traffdaq.com/"], :root a[href^="https://tracking.trackcasino.co/"], :root a[href^="https://tracking.comfortclick.eu/"], :root a[href^="https://tracking.avapartner.com/"], :root a[href^="https://track.ultravpn.com/"], :root a[href^="https://track.totalav.com/"], :root a[href^="https://track.themadtrcker.com/"], :root a[href^="https://track.interactivegf.com/"], :root a[href^="https://vlnk.me/"], :root a[href^="https://track.healthtrader.com/"], :root a[href^="https://track.effiliation.com/servlet/effi.click?"] > img, :root a[href^="https://track.clickmoi.xyz/"], :root a[href^="https://track.afcpatrk.com/"], :root a[href^="https://tupitea.co/"], :root a[href^="https://track.adform.net/"], :root a[href^="https://torguard.net/aff.php"] > img, :root a[href^="https://tm-offers.gamingadult.com/"], :root div[data-adname], :root a[href^="https://thechleads.pro/"], :root a[href^="https://tracking.gitads.io/"], :root a[href^="https://taghaugh.com/"], :root a[href^="https://t.mobtya.com/"], :root a[href^="https://t.hrtyj.com/"], :root a[href^="https://www.profitablecpmgate.com/"], :root a[href^="https://t.adating.link/"], :root a[href^="https://topoffers.com/"][href*="/?pid="], :root a[href^="https://syndication.dynsrvtbg.com/"], :root a[href^="https://streamate.com/landing/click/"], :root a[href^="https://s.zlink2.com/"], :root a[href^="https://reachtrgt.com/"], :root a[href^="https://queersodadults.com/"], :root a[href^="https://promo-bc.com/"], :root a[href^="https://prf.hn/click/"][href*="/camref:"] > img, :root a[href^="https://serve.awmdelivery.com/"], :root a[href^="https://prf.hn/click/"][href*="/adref:"] > img, :root a[href^="https://pongidsrunback.com/"], :root a[href^="https://pcm.bannerator.com/"], :root iframe[id^="google_ads_frame"], :root a[href^="https://pb-track.com/"], :root a[href^="https://partners.fxoro.com/click.php?"], :root a[href^="https://paid.outbrain.com/network/redir?"], :root a[href^="https://torrentsafeguard.com/?aid="], :root a[href^="https://offers.refchamp.com/"], :root a[href^="https://oackoubs.com/"], :root a[href^="https://track.wg-aff.com"], :root a[href^="https://nutrientassumptionclaims.com/"], :root a[href^="https://ndt5.net/"], :root a[href^="https://natour.naughtyamerica.com/track/"], :root a[href^="https://www.highperformancecpmgate.com/"], :root a[href^="https://t.grtyi.com/"], :root a[href^="https://myusenet.xyz/"], :root a[href^="https://msecure117.com/"], :root a[href^="https://moneynow.one/"], :root div[id^="ezoic-pub-ad-"], :root a[href^="https://mk-cdn.net/"], :root .trc_rbox_div .syndicatedItemUB, :root [href^="https://zone.gotrackier.com/"], :root a[href^="https://meet-to-fuck.com/"], :root [href^="https://www.herbanomic.com/"] > img, :root a[href^="https://maymooth-stopic.com/"], :root div[id^="google_dfp_"], :root a[href^="http://googleads.g.doubleclick.net/pcs/click"], :root a[href^="https://look.utndln.com/"], :root a[href^="https://a.bestcontentweb.top/"], :root a[href^="https://lobimax.com/"], :root a[href^="https://lead1.pl/"], :root a[href^="https://refpazkjixes.top/"], :root a[href^="https://landing.brazzersplus.com/"], :root a[href^="https://landing.brazzersnetwork.com/"], :root a[href^="https://ads.leovegas.com/redirect.aspx?"], :root a[href^="https://land.brazzersnetwork.com/landing/"], :root a[href^="https://juicyads.in/"], :root a[href^="https://itubego.com/video-downloader/?affid="], :root a[href^="https://movie.download-file.org/"], :root a[href^="https://iqbroker.com/"][href*="?aff="], :root a[href^="https://incisivetrk.cvtr.io/click?"], :root a[href^="https://iac.ampxdirect.com/"], :root a[href^="https://go.zybrdr.com"], :root [href^="http://join.michelle-austin.com/"], :root a[href^="https://go.xxxiijmp.com"], :root a[href*=".zlinkm.com/"], :root a[href^="https://go.xtbaffiliates.com/"], :root a[href^="https://thaudray.com/"], :root [data-role="tile-ads-module"], :root a[href^="https://adsrv4k.com/"], :root a[href^="https://go.xlviirdr.com"], :root .card-captioned.crd > .crd--cnt > .s2nPlayer, :root [data-css-class="dfp-inarticle"], :root a[href^="https://go.tmrjmp.com"], :root a[href^="https://refpa4903566.top/"], :root a[href^="https://go.strpjmp.com/"], :root a[href^="https://go.skinstrip.net"][href*="?campaignId="], :root a[href^="https://go.markets.com/visit/?bta="], :root a[href^="//lambingsyddir.com/"], :root a[href^="https://billing.purevpn.com/aff.php"] > img, :root a[href^="https://go.hpyrdr.com/"], :root a[href^="https://go.goaserv.com/"], :root a[href^="https://go.ebrokerserve.com/"], :root a[href^="https://go.dmzjmp.com"], :root a[href^="https://ismlks.com/"], :root [href^="https://www.mypillow.com/"] > img, :root a[href^="https://azpresearch.club/"], :root a[href^="https://go.xlirdr.com"], :root a[href^="https://track.afftck.com/"], :root a[href^="https://gohere.pl/"], :root a[href^="https://go.cmrdr.com/"], :root a[href^="https://www.bebi.com"], :root a[href^="https://loboclick.com"], :root iframe[src^="https://pagead2.googlesyndication.com/"], :root a[href^="http://www.onwebcam.com/random?t_link="], :root a[href^="https://get2nesoft1.ru/"], :root [href^="https://kingered-banctours.com/"], :root a[href^="https://get.surfshark.net/aff_c?"][href*="&aff_id="] > img, :root a[href^="https://affiliate.rusvpn.com/click.php?"], :root a[href^="https://geniusdexchange.com/"], :root a[href^="https://aj1070.online/"], :root a[href^="https://frameworkdeserve.com/"], :root a[href^="https://www.mrskin.com/tour"], :root a[href^="https://financeads.net/tc.php?"], :root bottomadblock, :root a[href^="https://fertilitycommand.com/"], :root a[href^="https://bluedelivery.pro/"], :root a[href^="https://fast-redirecting.com/"], :root a[href^="https://fakelay.com/"], :root a[href^="https://medleyads.com/"], :root div[data-native-ad], :root AD-SLOT, :root a[href^="https://engine.trackingdesks.com/"], :root a[href^="https://engine.blueistheneworanges.com/"], :root a[href^="https://tc.tradetracker.net/"] > img, :root a[href^="https://dianches-inchor.com/"], :root a[href^="https://go.admjmp.com/"], :root amp-fx-flying-carpet, :root a[href^="https://dfsdkkka.com/"], :root .ob_dual_right > .ob_ads_header ~ .odb_div, :root a[href^="https://deliver.tf2www.com/"], :root [href^="https://www.targetingpartner.com/"], :root [href^="https://detachedbates.com/"], :root a[href^="https://deliver.ptgncdn.com/"], :root a[href^="https://datingbests.life/"], :root #kt_player > a[target="_blank"], :root a[href^="https://cpartner.bdswiss.com/"], :root a[href^="https://clixtrac.com/"], :root AD-TRIPLE-BOX, :root a[href^="https://click.hoolig.app/"], :root img[src^="https://images.purevpnaffiliates.com"], :root a[href^="https://porntubemate.com/"], :root a[href^="http://www.gfrevenge.com/landing/"], :root a[href^="https://clickadilla.com/"], :root a[href^="https://click.dtiserv2.com/"], :root a[href^="https://go.xlvirdr.com"], :root a[href^="https://claring-loccelkin.com/"], :root a[href^="https://chaturbate.com/in/?track="], :root a[href^="https://chaturbate.com/in/?tour="], :root a[href^="https://aaucwbe.com/"], :root a[href^="https://cams.imagetwist.com/in/?track="], :root a[href^="https://mob1ledev1ces.com/"], :root a[href^="https://explore.findanswersnow.net/"], :root a[href^="https://camfapr.com/landing/click/"], :root a[href^="https://my-movie.club/"], :root a[href^="https://cam4com.go2cloud.org/"], :root a[href^="https://affcpatrk.com/"], :root a[href^="https://bongacams2.com/track?"], :root a[href^="https://www.sheetmusicplus.com/"][href*="?aff_id="], :root a[href^="https://bngpt.com/"], :root #topstuff > #tads, :root a[href^="https://black77854.com/"], :root a[href^="https://burpee.xyz/"], :root a[href*=".flndmyiove.net/"], :root [href^="http://join.trannies-fuck.com/"], :root [href^="http://www.fleshlightgirls.com/"], :root a[href^="https://bestdatinghere.life/"], :root a[target="_blank"][onmousedown="this.href^='http://paid.outbrain.com/network/redir?"], :root a[href^="https://banners.livepartners.com/"], :root a[href^="https://m.do.co/c/"] > img, :root div[id^="sticky_ad_"], :root a[href^="https://avtub.click/assets/link.php"], :root a[href^="https://go.gldrdr.com/"], :root [id^="ad_sky"], :root a[href^="https://funkydaters.com/"], :root [href^="https://www.cloudways.com/en/?id"], :root a[href^="https://as.sexad.net/"], :root a[href^="https://bestcond1tions.com/"], :root a[href^="https://takeallsoft.ru/"], :root a[href^="https://as.conjectwatson.com/"], :root [href="https://masstortfinancing.com"] img, :root a[href^="https://bongacams10.com/track?"], :root [data-ez-name], :root a[href^="https://awecrptjmp.com/"], :root a[href^="https://someperceptionparade.com/"], :root a[href^="https://galaxyroms.net/?scr="], :root a[href^="https://albionsoftwares.com/"], :root display-ad-component, :root a[href^="https://ak.hetaruwg.com/"], :root a[href^="https://go.etoro.com/"] > img, :root a[href^="https://go.alxbgo.com/"], :root a[href^="https://aff-ads.stickywilds.com/"], :root a[href^="https://t.hrtye.com/"], :root a[href^="https://ads.cdn.live/"], :root a[href^="https://join.sexworld3d.com/track/"], :root a[href^="https://intenseaffiliates.com/redirect/"], :root a[href^="https://aweptjmp.com/"], :root a[href^="https://ads.ad4game.com/"], :root a[href^="https://affpa.top/"], :root a[href^="https://adnetwrk.com/"], :root a[href^="https://adjoincomprise.com/"], :root [href^="http://misslinkvocation.com/"], :root a[href^="https://adclick.g.doubleclick.net/"], :root a[href^="http://secure.vivid.com/track/"], :root a[href^="https://go.nordvpn.net/aff"] > img, :root a[href^="https://misspkl.com/"], :root [href^="http://clicks.totemcash.com/"], :root a[href^="https://ad.zanox.com/ppc/"] > img, :root a[href^="https://ad.kubiccomps.icu/"], :root a[href^="https://adswick.com/"], :root a[href^="https://static.fleshlight.com/images/banners/"], :root a[href^="https://ad.doubleclick.net/"], :root a[href^="https://ad.atdmt.com/"], :root a[href^="https://meet-sex-here.com/"], :root a[href^="https://iactrivago.ampxdirect.com/"], :root a[href^="https://a.medfoodhome.com/"], :root [data-m-ad-id], :root a[href^="https://a-ads.com/"], :root a[href^="http://www.mrskin.com/tour"], :root a[href^="https://k2s.cc/pr/"], :root a[data-url^="http://paid.outbrain.com/network/redir?"], :root a[href^="http://www.coiwqe.site/"], :root iframe[src^="http://www.adpeepshosted.com/"], :root a[href^="https://prf.hn/click/"][href*="/creativeref:"] > img, :root a[href^="http://www.adultempire.com/unlimited/promo?"][href*="&partner_id="], :root a[href^="https://ads-for-free.com/click.php?"], :root a[href^="http://www.FriendlyDuck.com/"], :root a[href^="http://traffic.tc-clicks.com/"], :root a[href^="http://tc.tradetracker.net/"] > img, :root .trc_rbox .syndicatedItem, :root a[href^="https://1free33style.com/"], :root a[href^="http://rs-stripe.wsj.com/stripe/redirect"], :root a[href^="http://tour.mrskin.com/"], :root a[href^="http://pubads.g.doubleclick.net/"], :root [onclick*="content.ad/"], :root a[href^="http://pityhostngco2.xyz/"], :root a[href^="http://partners.etoro.com/"], :root .commercial-unit-mobile-top .jackpot-main-content-container > .UpgKEd + .nZZLFc > div > .vci, :root a[href^="http://paid.outbrain.com/network/redir?"], :root a[data-redirect^="https://paid.outbrain.com/network/redir?"], :root [href^="https://www.reimageplus.com/"], :root a[href^="https://engine.phn.doublepimp.com/"], :root a[href^="http://intent.bingads.com/"], :root a[href^="https://cagothie.net/"], :root a[href^="https://watchmygirlfriend.tv/"], :root a[href^="http://go.xtbaffiliates.com/"], :root a[href^="http://go.fpmarkets.com/"], :root a[href^="https://porngames.adult/?SID="], :root a[href^="http://go.247traffic.com/"], :root a[href^="http://www.advcashpro.com/aff/"], :root a[href^="http://deloplen.com/"], :root a[href^="http://d2.zedo.com/"], :root .rc-cta[data-target], :root [href^="http://go.cm-trk2.com/"], :root a[href^="http://adtrack1.club/"], :root a[href^="http://click.payserve.com/"], :root a[href^="https://bs.serving-sys.com"], :root [class^="chp_ads_block"], :root a[href^="http://betahit.click/"], :root a[href^="https://clicks.pipaffiliates.com/"], :root [href^="https://noqreport.com/"] > img, :root a[href^="//wagerprocuratorantiterrorist.com/"], :root a[href^="http://adserver.adreactor.com/"], :root [href^="https://cipledecline.buzz/"], :root a[href^="https://earandmarketing.com/"], :root a[href^="http://adf.ly/?id="], :root [href^="http://homemoviestube.com/"], :root a[href^="http://ad.doubleclick.net/"], :root .commercial-unit-mobile-top .jackpot-main-content-container > .UpgKEd + .nZZLFc > .vci, :root a[href^="//syndication.dynsrvtbg.com/"], :root a[href^="//pubads.g.doubleclick.net/"], :root a[href^="http://m.hsrve.com/"], :root [class^="s2nPlayer"], :root a[href^="https://chaturbate.jjgirls.com/?track="], :root a[href^="https://ausoafab.net/"], :root a[href^="//benoopto.com/"], :root [id^="ad-wrap-"], :root [href^="https://www.restoro.com/"], :root a[href^="//apptjmp.com/"], :root a[href^="https://dooloust.net/"], :root [href^="https://www.mypatriotsupply.com/"] > img, :root a[onmousedown^="this.href='http://paid.outbrain.com/network/redir?"][target="_blank"], :root [href^="https://secure.bmtmicro.com/servlets/"], :root a[href="//rufflycouncil.com/"], :root a[href*="https://www.sweetdeals.com/"] img, :root div[data-native_ad], :root a[href*=".zlink9.com/"], :root [data-d-ad-id], :root a[href*=".engine.adglare.net/"], :root a[href^="https://a.bestcontentoperation.top/"], :root a[href^="https://dishphysics.com/"], :root a[href^="//go.xlviiirdr.com"], :root [data-dynamic-ads], :root a[data-widget-outbrain-redirect^="http://paid.outbrain.com/network/redir?"], :root [data-ad-width], :root [href^="https://join.playboyplus.com/track/"], :root a[data-url^="http://paid.outbrain.com/network/redir?"] + .author, :root a[href^="https://axdsz.pro/"], :root a[href^="http://bodelen.com/"], :root a[data-oburl^="https://paid.outbrain.com/network/redir?"], :root a[href^="https://ptapjmp.com/"], :root DFP-AD, :root a[href^="http://allaptair.club/"], :root a[href^="//go.eabids.com/"], :root a[data-oburl^="http://paid.outbrain.com/network/redir?"], :root [href^="https://cpa.10kfreesilver.com/"], :root a[href^="https://a.bestcontentfood.top/"], :root a[href^="https://reinstandpointdumbest.com/"], :root a[href*="http://MyPillow.com"] > img, :root a[data-obtrack^="http://paid.outbrain.com/network/redir?"], :root a[href^="http://wct.link/"], :root [href^="https://goldforyourfuture.com/clk.trk"] img, :root [href^="https://infinitytrk.com/"], :root [onclick^="location.href='http://www.reimageplus.com"], :root a[href^="https://pl.premium4kflix.website/"], :root [id^="chp_ads_block"], :root a[href^="https://go.julrdr.com/"], :root a[href^="//chrif8kdstie.com/"], :root [id^="section-ad-banner"], :root .commercial-unit-mobile-top > div[data-pla="1"], :root a[href^="https://www.sweetdeals.com"], :root a[href^="https://track.bruceads.com/"], :root a[href^="https://t.aslnk.link/"], :root [href^="https://zstacklife.com/"] img, :root [data-ad-manager-id], :root a[href^="https://fleshlight.sjv.io/"], :root div[id^="zergnet-widget"], :root [href^="https://www.mystore.com/"] > img, :root div[id^="ad-position-"], :root a[href^="http://adultfriendfinder.com/go/page/landing"], :root a[href^="http://affiliate.glbtracker.com/"], :root a[href^="https://leg.xyz/?track="], :root a[href^="http://bc.vc/?r="], :root [href^="https://www.brighteonstore.com/products/"] img, :root a[href^="https://syndication.exoclick.com/"], :root [href^="https://track.fiverr.com/visit/"] > img, :root a[href^="https://go.trackitalltheway.com/"], :root a[href^="https://go.cmtaffiliates.com/"], :root [data-name="adaptiveConstructorAd"], :root [href^="https://optimizedelite.com/"] > img, :root a[href^="https://www.awin1.com/cread.php?awinaffid="], :root a[href^="//thaudray.com/"], :root a[href*=".trust.zone"], :root a[href^="http://trk.mdrtrck.com/"], :root [href^="https://shrugartisticelder.com"], :root div[id^="crt-"][style], :root a[href^="https://s.zlink1.com/"], :root a[href^="http://adultgames.xxx/"], :root a[href^="https://traffic.bannerator.com/"], :root [href^="https://shiftnetwork.infusionsoft.com/go/"] > img, :root a[href^="https://vo2.qrlsx.com/"], :root [href^="https://www.avantlink.com/click.php"] img, :root a[href^="https://losingoldfry.com/"], :root div[id^="ad-inserter-"], :root .scroll-fixable.rail-right > .deals-rail, :root a[href^="https://see.kmisln.com/"], :root [href^="https://routewebtk.com/"], :root a[href^="https://www.bet365.com/"][href*="affiliate="], :root a[href^="https://mmwebhandler.aff-online.com/"], :root [href^="https://r.kraken.com/"], :root a[href^="https://awptjmp.com/"], :root a[href^="https://go.goasrv.com/"], :root .commercial-unit-mobile-top > .v7hl4d, :root [href^="http://mypillow.com/"] > img, :root a[href^="http://bongacams.com/track?"], :root a[href^="https://mediaserver.entainpartners.com/renderBanner.do?"], :root [href^="https://stvkr.com/"], :root a[href^="https://go.hpyjmp.com"], :root a[href^="https://tour.mrskin.com/"], :root a[href^="https://fastestvpn.com/lifetime-special-deal?a_aid="], :root ADS-RIGHT, :root [href^="https://mystore.com/"] > img, :root [href^="https://mypatriotsupply.com/"] > img, :root [href^="https://mylead.global/stl/"] > img, :root div[id^="ad_rect_"], :root .vid-present > .van_vid_carousel__padding, :root a[href^="https://syndication.optimizesrv.com/"], :root [id^="google_ads_iframe"], :root app-ad, :root a[href^="https://go.xxxijmp.com"], :root [href^="https://istlnkcl.com/"], :root a[href^="https://playuhd.host/"], :root a[href^="https://5hjdbfjfd5.monster/"], :root [href^="https://www.hostg.xyz/"] > img, :root .section-subheader > .section-hotel-prices-header, :root [href^="http://join.ts-dominopresley.com/"], :root [href^="https://go.affiliatexe.com/"], :root a[href^="https://meet-sexhere.com/"], :root [href^="https://go.4rabettraff.com/"], :root [href^="https://glersakr.com/"], :root a[href^="https://click.a-ads.com/"], :root a[href^="https://wittered-mainging.com/"], :root [href^="https://engine.gettopple.com/"], :root [href^="https://awbbjmp.com/"], :root a[href^="https://gghf.mobi/"], :root [href^="https://affect3dnetwork.com/track/"], :root a[href^="https://go.currency.com/"], :root [href^="http://www.mypillow.com/"] > img, :root a[href^="//coarsewary.com/"], :root a[href^="https://a.montangop.top/"], :root [href^="https://v.investologic.co.uk/"], :root a[href^="https://dialling-abutory.com/"], :root div[id^="div-ads-"], :root [href^="https://rapidgator.net/article/premium/ref/"], :root a[href^="https://www.sugarinstant.com/?partner_id="], :root a[href^="https://adultfriendfinder.com/go/page/landing"], :root div[id^="advads-"], :root div[data-role="sidebarAd"], :root [href^="https://join3.bannedsextapes.com"], :root div[data-spotim-slot], :root [href^="https://antiagingbed.com/discount/"] > img, :root a[href^="https://go.247traffic.com/"], :root [href^="https://join.girlsoutwest.com/"], :root [href^="http://trafficare.net/"], :root a[href^="https://adserver.adreactor.com/"], :root [href^="http://join.shemalesfromhell.com/"], :root [id^="ad_slider"], :root [href^="https://clk.right-wing-health.com/"], :root a[href^="http://www.adultdvdempire.com/?partner_id="][href*="&utm_"], :root [href^="http://join.shemale.xxx/"], :root [href^="https://ilovemyfreedoms.com/landing-"], :root a[href^="https://ads.betfair.com/redirect.aspx?"], :root a[href^="http://cam4com.go2cloud.org/aff_c?"], :root a[href^="https://www.chngtrack.com/"], :root a[href^="https://cpmspace.com/"], :root [href^="https://freecourseweb.com/"] > .sitefriend, :root a[href^="https://ads.planetwin365affiliate.com/redirect.aspx?"], :root [href^="http://join.rodneymoore.com/"], :root a[href^="https://uncensored3d.com/"], :root a[href^="https://creacdn.top-convert.com/"], :root [href^="https://go.xlrdr.com"], :root [id^="div-gpt-ad"], :root .ob_container .item-container-obpd, :root gpt-ad, :root [href^="http://www.pingperfect.com/aff.php"], :root a[href^="https://scurewall.co/"], :root [name^="google_ads_iframe"], :root a[href^="https://landing1.brazzersnetwork.com"], :root #slashboxes > .deals-rail, :root [href^="http://globsads.com/"], :root [href^="//ngeoziadiyc4hi2e.com/"], :root a[href^="https://go.xxxjmp.com"], :root a[href^="https://transfer.xe.com/signup/track/redirect?"], :root #leader-companion > a[href], :root [data-desktop-ad-id], :root [href^="https://wct.link/"], :root [href^="https://traffserve.com/"], :root a[href^="https://1startfiledownload1.com/"], :root a[href^="https://a.adtng.com/"], :root a[href^="http://static.fleshlight.com/images/banners/"], :root [href="https://ourgoldguy.com/contact/"] img, :root [href="https://www.masstortfinancing.com/"] > img, :root a[href^="https://lnkxt.bannerator.com/"], :root div[id^="ad_position_"], :root a[href^="https://ovb.im/"], :root a[href^="http://hotcandyland.com/partner/"], :root [href="https://jdrucker.com/gold"] > img, :root [href^="https://goldcometals.com/clk.trk"], :root [data-mobile-ad-id], :root a[href^="http://affiliates.thrixxx.com/"], :root #searchResultsList > div > div[onclick$="'inline.ad'});"], :root a[href^="https://www.adultempire.com/"][href*="?partner_id="], :root [data-template-type="nativead"], :root a[data-redirect^="this.href='http://paid.outbrain.com/network/redir?"], :root a[href^="https://go.xlivrdr.com"], :root a[href^="https://www.onlineusershielder.com/torrent-guard/?"], :root [data-freestar-ad], :root [data-ad-cls], :root div[id^="taboola-stream-"], :root [href^="https://go.astutelinks.com/"], :root [href^="http://join.hardcoreshemalevideo.com/"], :root a[href^="http://ads2.williamhill.com/redirect.aspx?"], :root [href^="http://residenceseeingstanding.com/"], :root a[href^="https://www.adskeeper.com"], :root a[href^="//agacelebir.com/"], :root [href^="https://totlnkcl.com/"], :root div[data-adunit], :root app-large-ad, :root [href^="https://turtlebids.irauctions.com/"] img, :root a[href^="http://www.onclickmega.com/jump/next.php?"], :root .trc_rbox_border_elm .syndicatedItem, :root [class^="amp-ad-"], :root div[id^="_vdo_ads_player_ai_"], :root a[href^="http://enter.anabolic.com/track/"], :root .trc_related_container div[data-item-syndicated="true"], :root a[href^="https://delivery.porn.com/"], :root a[href^="https://www.liquidfire.mobi/"], :root [href^="https://click2cvs.com/"], :root a[href^="https://a2.adform.net/"], :root a[data-redirect^="http://paid.outbrain.com/network/redir?"], :root [data-revive-zoneid], :root a[href^="https://googleads.g.doubleclick.net/pcs/click"], :root AMP-AD, :root [href^="https://mypillow.com/"] > img, :root [href^="https://ad.admitad.com/"], :root [href^="http://join.shemalepornstar.com/"], :root a[href^="https://go.xlviiirdr.com"], :root .trc_rbox_div .syndicatedItem, :root a-ad, :root [data-ad-module], :root .grid > .container > #aside-promotion, :root [href^="https://trackfin.asia/"], :root .plistaList > .plista_widget_underArticle_item[data-type="pet"], :root a[href^="https://spygasm.com/track?"], :root a[href^="https://agacelebir.com/"], :root a[href*="//lkstrck2.com/"], :root .plistaList > .itemLinkPET, :root [data-advadstrackid], :root [href^="https://affiliate.fastcomet.com/"] > img, :root #atvcap + #tvcap > .mnr-c > .commercial-unit-mobile-top, :root a[href^="https://www.googleadservices.com/pagead/aclk?"], :root a[href^="https://awentw.com/"], :root [class^="div-gpt-ad"], :root a[href^="//voyeurhit.com/cs/"], :root div[id^="ad_bnr_"], :root a[href^="https://join.virtuallust3d.com/"], :root a[href^="https://speedsupermarketdonut.com/"], :root #taw > .med + div > #tvcap > .mnr-c:not(.qs-ic) > .commercial-unit-mobile-top, :root [data-adblockkey], :root div.fadeInDown[id$="____equal"][class$="____equal"], :root a[href^="https://mediaserver.gvcaffiliates.com/renderBanner.do?"], :root a[href^="https://join.dreamsexworld.com/"], :root a[href^="https://odnxe.lncredlbiedate.com/"], :root a[href^="https://click.linksynergy.com/fs-bin/"], :root a[href^="https://join.virtualtaboo.com/track/"], :root a[href^="http://https://www.get-express-vpn.com/offer/"], :root a[href^="https://americafirstpolls.com/"] { display: none !important; }</style><style type="text/css">@font-face { font-family: Roboto; src: url("chrome-extension://mcgbeeipkmelnpldkobichboakdfaeon/css/Roboto-Regular.ttf"); }</style></head>
+
+<body>
+    <header>
+        <nav class="navbar">
+            <ul>
+                <li><a href="newin.html">MEN</a></li>
+                <li><a href="women.html">WOMEN</a></li>
+                <li><a href="accessories.html">ACCESSORIES</a></li>
+                <li><a href="newin.html">NEW IN</a></li>
+                <li><a href="contact.html">CONTACT</a></li>
+                <li><img src="https://assets.bonkerscorner.com/uploads/2021/03/12015638/bonkers_corner_logo-new_vertical.svg" width="150px" height="80px"></li>
+            </ul>
+            <div class="search">
+                <li><img src="https://img.icons8.com/ios-glyphs/2x/search--v2.png" alt="search" width="30px" height="30px"></li>
+                <li><img src="https://img.icons8.com/ios/344/shopping-bag--v1.png" width="30px" height="30px"></li>
+                <li><a href="formwebsite%20(2).html"><img src="https://img.icons8.com/fluency-systems-regular/344/user.png" width="30px" height="30px">
+                    </a> </li>
+            </div>
+
+
+        </nav>
+    </header>
+    <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="download.jfif" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="images (1).jfif" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="images.jfif" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="images (2).jfif" class="d-block w-100" alt="...">
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="container3">
+
+
+
+        <a class="bro" href="http://">
+            <div class="product a"></div>
+            <div class="tshirt p"></div>
+            <div class="notice">Bonkers oversized T-shirt <br>Rs.999</div>
+            <div class="option">BUY NOW</div>
+        </a>
+        <a class="bro" href="http://">
+            <div class="product b"></div>
+            <div class="tshirt q"></div>
+            <div class="notice">Bonkers oversized T-shirt <br>Rs.999</div>
+            <div class="option">BUY NOW</div>
+        </a>
+        <a class="bro" href="http://">
+            <div class="product c"></div>
+            <div class="tshirt r"></div>
+            <div class="notice">Bonkers oversized T-shirt <br>Rs.999</div>
+            <div class="option">BUY NOW</div>
+        </a>
+        <a class="bro" href="http://">
+            <div class="product d"></div>
+            <div class="tshirt s"></div>
+            <div class="notice">Bonkers oversized T-shirt <br>Rs.999 </div>
+            <div class="option">BUY NOW</div>
+        </a>
+        <a class="bro" href="http://">
+            <div class="product e"></div>
+            <div class="tshirt t"></div>
+            <div class="notice">Bonkers oversized T-shirt <br>Rs.999 </div>
+            <div class="option">BUY NOW</div>
+        </a> <a class="bro" href="http://">
+            <div class="product f"></div>
+            <div class="tshirt u"></div>
+            <div class="notice">Bonkers oversized T-shirt <br>Rs.999 </div>
+            <div class="option">BUY NOW</div>
+        </a> <a class="bro" href="http://">
+            <div class="product g"></div>
+            <div class="tshirt v"></div>
+            <div class="notice">Bonkers oversized T-shirt <br>Rs.999 </div>
+            <div class="option">BUY NOW</div>
+        </a> <a class="bro" href="http://">
+            <div class="product h"></div>
+            <div class="tshirt w"></div>
+            <div class="notice">Bonkers oversized T-shirt <br>Rs.999 </div>
+            <div class="option">BUY NOW</div>
+        </a> <a class="bro" href="http://">
+            <div class="product d"></div>
+            <div class="tshirt s"></div>
+            <div class="notice">Bonkers oversized T-shirt <br>Rs.999 </div>
+            <div class="option">BUY NOW</div>
+        </a>
+        <a class="bro" href="http://">
+            <div class="product e"></div>
+            <div class="tshirt t"></div>
+            <div class="notice">Bonkers oversized T-shirt <br>Rs.999 </div>
+            <div class="option">BUY NOW</div>
+        </a>
+        <a class="bro" href="http://">
+            <div class="product b"></div>
+            <div class="tshirt q"></div>
+            <div class="notice">Bonkers oversized T-shirt <br>Rs.999</div>
+            <div class="option">BUY NOW</div>
+        </a>
+        <a class="bro" href="http://">
+            <div class="product a"></div>
+            <div class="tshirt p"></div>
+            <div class="notice">Bonkers oversized T-shirt <br>Rs.999</div>
+            <div class="option">BUY NOW</div>
+        </a>
+
+    </div>
+    <div class="contact">
+        <div class="call">FOLLOW US :</div>
+        <a class="instagram" href="https://www.instagram.com/p/Ce9DLpQoR6p/?igshid=MDJmNzVkMjY=">
+            <div class="insta1"></div>
+        </a>
+        <a class="facebook" href="">
+            <div class="fac1"></div>
+        </a>
+        <a class="twitter" href="">
+            <div class="twit1"></div>
+        </a>
+
+    </div>
+    <div class="container4">
+
+        <div class="quality">
+            <div class="propertyz"></div>
+            <div class="work z">
+                <h3>SHIPPING WITHIN 48 HOURS</h3>
+                <p>order will be shipped within 48 hours from the time since order is placed</p>
+            </div>
+        </div>
+        <div class="quality">
+            <div class="propertyx"></div>
+            <div class="work z">
+                <h3>5% OFF || FREE DELIVERY</h3>
+                <p>5% OFF on Pre-paid orders. Free delivery on COD orders above ₹1499.</p>
+            </div>
+        </div>
+        <div class="quality">
+            <div class="propertyy"></div>
+            <div class="work z">
+                <h3>MADE IN INDIA</h3>
+                <p>Our products are 100% made in India. From raw fabric to the final product!</p>
+            </div>
+        </div>
+    </div>
+
+
+<script>
+		function returnCommentSymbol(language = "javascript") {
+			const languageObject = {
+				bat: "@REM",
+				c: "//",
+				csharp: "//",
+				cpp: "//",
+				closure: ";;",
+				coffeescript: "#",
+				dockercompose: "#",
+				css: "/*DELIMITER*/",
+				"cuda-cpp": "//",
+				dart: "//",
+				diff: "#",
+				dockerfile: "#",
+				fsharp: "//",
+				"git-commit": "//",
+				"git-rebase": "#",
+				go: "//",
+				groovy: "//",
+				handlebars: "{{!--DELIMITER--}}",
+				hlsl: "//",
+				html: "<!--DELIMITER-->",
+				ignore: "#",
+				ini: ";",
+				java: "//",
+				javascript: "//",
+				javascriptreact: "//",
+				json: "//",
+				jsonc: "//",
+				julia: "#",
+				latex: "%",
+				less: "//",
+				lua: "--",
+				makefile: "#",
+				markdown: "<!--DELIMITER-->",
+				"objective-c": "//",
+				"objective-cpp": "//",
+				perl: "#",
+				perl6: "#",
+				php: "<!--DELIMITER-->",
+				powershell: "#",
+				properties: ";",
+				jade: "//-",
+				python: "#",
+				r: "#",
+				razor: "<!--DELIMITER-->",
+				restructuredtext: "..",
+				ruby: "#",
+				rust: "//",
+				scss: "//",
+				shaderlab: "//",
+				shellscript: "#",
+				sql: "--",
+				svg: "<!--DELIMITER-->",
+				swift: "//",
+				tex: "%",
+				typescript: "//",
+				typescriptreact: "//",
+				vb: "'",
+				xml: "<!--DELIMITER-->",
+				xsl: "<!--DELIMITER-->",
+				yaml: "#"
+			}
+			return languageObject[language].split("DELIMITER")
+		}
+		var savedChPos = 0
+		var returnedSuggestion = ''
+		let editor, doc, cursor, line, pos
+		pos = {line: 0, ch: 0}
+		var suggestionsStatus = false
+		var docLang = "python"
+		document.addEventListener("keydown", (event) => {
+		setTimeout(()=>{
+			editor = event.target.closest('.CodeMirror');
+			const codeEditor = editor.CodeMirror
+			if (editor){
+				doc = editor.CodeMirror.getDoc()
+				cursor = doc.getCursor()
+				line = doc.getLine(cursor.line)
+				pos = {line: cursor.line, ch: line.length}
+
+				if(cursor.ch > 0){
+					savedChPos = cursor.ch
+				}
+
+				const fileLang = doc.getMode().name
+				docLang = fileLang
+				const commentSymbol = returnCommentSymbol(fileLang)
+				if (event.key == "?"){
+					var lastLine = line
+					lastLine = lastLine.slice(0, savedChPos - 1)
+
+					if(lastLine.startsWith(commentSymbol[0])){
+						lastLine += " "+fileLang
+						lastLine = lastLine.split(commentSymbol[0])[1]
+						window.postMessage({source: 'getQuery', payload: { data: lastLine } } )
+						//displayGrey(query)
+					}
+				}else if(event.key === "Enter" && suggestionsStatus){
+					var query = doc.getRange({ line: Math.max(0,cursor.line-10), ch: 0 }, { line: cursor.line, ch: line.length })
+					window.postMessage({source: 'getSuggestion', payload: { data: query } } )
+				}else if(event.key === "ArrowRight" && returnedSuggestion){
+					acceptTab(returnedSuggestion)
+				}
+			}
+		}, 0)
+		})
+
+		function acceptTab(text){
+		if (suggestionDisplayed){
+			doc.replaceRange(text, pos)
+			suggestionDisplayed = false
+			returnedSuggestion = ""
+		}
+		}
+		function displayGrey(text){
+			var el = document.querySelector(".blackbox-suggestion")
+			if(!el){
+				el = document.createElement('span')
+				el.classList.add("blackbox-suggestion")
+				el.innerText = text
+				el.style = 'color:grey'
+			}
+			
+			var lineIndex = pos.line;
+			editor.getElementsByClassName('CodeMirror-line')[lineIndex].appendChild(el)
+			suggestionDisplayed = true
+		}
+		window.addEventListener('message', (event)=>{
+		if (event.source !== window ) return
+		if (event.data.source == 'return'){
+			const formattedCode = formatCode(event.data.payload.data)
+			returnedSuggestion = formattedCode
+			displayGrey(formattedCode)
+		}
+		if(event.data.source == 'suggestReturn'){
+			returnedSuggestion = event.data.payload.data
+			displayGrey(event.data.payload.data)
+		}
+		if(event.data.source == 'suggestionsStatus'){
+			suggestionsStatus = event.data.payload.enabled
+		}
+		})
+		document.addEventListener("keyup", function(){
+			returnedSuggestion = ""
+		})
+		function formatCode(data) {
+			if (Array.isArray(data)) {
+				var finalCode = ""
+				var pairs = []
+		
+				const commentSymbol = returnCommentSymbol(docLang)
+				data.forEach((codeArr, idx) => {
+					const code = codeArr[0]
+					var desc = codeArr[1]
+					const descArr = desc.split("\n")
+					var finalDesc = ""
+					descArr.forEach((descLine, idx) => {
+						const whiteSpace = descLine.search(/\S/)
+						if (commentSymbol.length < 2 || idx === 0) {
+							finalDesc += insert(descLine, whiteSpace, commentSymbol[0])
+						}
+						if (commentSymbol.length > 1 && idx === descArr.length - 1) {
+							finalDesc = finalDesc + commentSymbol[1] + "\n"
+						}
+					})
+		
+					finalCode += finalDesc + "\n\n" + code
+					pairs.push(finalCode)
+				})
+				return "\n"+pairs.join("\n")
+			}
+		
+			return "\n"+data
+		}
+		
+		function insert(str, index, value) {
+			return str.substr(0, index) + value + str.substr(index)
+		}
+	</script></body></html>
